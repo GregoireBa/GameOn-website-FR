@@ -136,9 +136,28 @@ function setupRadioListeners() {
 // Appeler setupRadioListeners lors de l'initialisation
 setupRadioListeners();
 
+// Attacher l'écouteur d'événements pour le bouton "Fermer"
+document.getElementById("close-button").addEventListener('click', function() {
+  // Cacher le message de succès
+  document.getElementById("success-message").style.display = "none";
+
+  // Réinitialiser le formulaire
+  document.getElementById("formGame").reset();
+
+  // Cacher la modal entière
+  document.querySelector('.bground').style.display = "none";
+
+});
+
+// Assurez-vous que le reste de la logique de soumission du formulaire est correctement gérée
 formGame.addEventListener('submit', function(event) {
+  event.preventDefault(); // Empêche la soumission par défaut du formulaire
   const isValid = validate();
-  if (!isValid) {
-    event.preventDefault(); // Empêche la soumission du formulaire si non valide
+  if (isValid) {
+      // Afficher le message de succès
+      document.getElementById("success-message").style.display = "block";
+     
+      // Cacher le formulaire
+      document.getElementById("formGame").style.display = "none";
   }
 });

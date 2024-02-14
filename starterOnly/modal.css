@@ -139,6 +139,22 @@ main {
   background: #3876ac;
 }
 
+.success-message{
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  font-size: 40px;
+  font-weight: normal;
+  height: 700px;
+  padding-top: 200px;
+  display: none;
+  margin-top: 150px;
+}
+
+.btn-submit.close-succes{
+  margin-top: 330px;
+}
+
 .footer {
   margin: 20px;
   padding: 10px;

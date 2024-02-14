@@ -39,7 +39,7 @@
           Vous aimez jouer ? Notre prochain évènement gaming est ouvert
           aux réservations... Places limitées !
         </p>
-        <button class="btn-signup modal-btn">
+        <button class="btn-signup modal-btn" id="open-modal-btn">
           je m'inscris
         </button>
       </div>
@@ -132,11 +132,16 @@
               </label>
               <br>
             </div>
-
-
-
+            
             <input class="btn-submit" type="submit" class="button" value="C'est parti" />
           </form>
+
+          <div id="success-message" class="success-message" style="display: none;">
+            <p>Merci pour <br> votre inscription</p>
+
+            <button id="close-button" class="btn-submit close-succes">Fermer</button>
+          </div>
+          
         </div>
       </div>
     </div>

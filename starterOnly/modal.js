@@ -28,3 +28,11 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
+function openModal() {
+  document.querySelector('.bground').style.display = "block";
+  // Assurez-vous que le formulaire et le message de succès sont dans l'état correct
+  document.getElementById("success-message").style.display = "none"; // Cache le message de succès
+  document.getElementById("formGame").style.display = "block"; // Affiche le formulaire
+}
+
+document.getElementById("open-modal-btn").addEventListener('click', openModal);
