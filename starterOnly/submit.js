@@ -43,7 +43,6 @@ function hideError(elementOrContainerId) {
 }
 
 // Fonction uniquement pour groupe button radio
-
 function showErrorForGroup(containerId, message) {
   let errorContainer = document.getElementById(containerId);
   if (!errorContainer) {
@@ -133,10 +132,10 @@ function setupRadioListeners() {
   });
 }
 
-// Appeler setupRadioListeners lors de l'initialisation
+// Appel setupRadioListeners lors de l'initialisation
 setupRadioListeners();
 
-// Attacher l'écouteur d'événements pour le bouton "Fermer"
+// Attache l'écouteur d'événements pour le bouton "Fermer"
 document.getElementById("close-button").addEventListener('click', function() {
   // Cacher le message de succès
   document.getElementById("success-message").style.display = "none";
@@ -149,7 +148,6 @@ document.getElementById("close-button").addEventListener('click', function() {
 
 });
 
-// Assurez-vous que le reste de la logique de soumission du formulaire est correctement gérée
 formGame.addEventListener('submit', function(event) {
   event.preventDefault(); // Empêche la soumission par défaut du formulaire
   const isValid = validate();

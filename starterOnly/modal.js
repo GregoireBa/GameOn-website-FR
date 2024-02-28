@@ -8,31 +8,32 @@ function editNav() {
 }
 
 // DOM Elements
-const modalbg = document.querySelector(".bground");
-const closmodalbg = document.querySelector(".close")
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
+const modalbg = document.querySelector(".bground"); // Fond de la modale pour l'afficher ou la cacher
+const closmodalbg = document.querySelector(".close"); // Bouton de fermeture de la modale
+const modalBtn = document.querySelectorAll(".modal-btn"); // Boutons qui ouvrent la modale
+const formData = document.querySelectorAll(".formData"); // Champs de formulaire dans la modale
 
-// launch modal event
+
+// Ajoute un écouteur sur chaque bouton pour ouvrir la modale au clic
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// launch modal form
+// Ouverture de la modale : rend la modale visible en changeant son style display en "block"
 function launchModal() {
   modalbg.style.display = "block";
 }
 // Écoute du click sur la class .close
 closmodalbg.addEventListener("click", closeModal);
 
-// Je change mon display si j'ai cliqué sur la class .close
+// Fermeture de la modale : cache la modale en changeant son style display en "none"
 function closeModal() {
   modalbg.style.display = "none";
 }
 
+// Ouvre la modale spécifique pour le jeu, cache le message de succès et affiche le formulaire de jeu
 function openModal() {
   document.querySelector('.bground').style.display = "block";
-  // Assurez-vous que le formulaire et le message de succès sont dans l'état correct
-  document.getElementById("success-message").style.display = "none"; // Cache le message de succès
-  document.getElementById("formGame").style.display = "block"; // Affiche le formulaire
+  document.getElementById("success-message").style.display = "none";
+  document.getElementById("formGame").style.display = "block";
 }
 
-document.getElementById("open-modal-btn").addEventListener('click', openModal);
+document.getElementBIyd("open-modal-btn").addEventListener('click', openModal);
