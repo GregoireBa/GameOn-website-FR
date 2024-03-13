@@ -36,4 +36,4 @@ function openModal() {
   document.getElementById("formGame").style.display = "block";
 }
 
-document.getElementBIyd("open-modal-btn").addEventListener('click', openModal);
+document.getElementById("open-modal-btn").addEventListener('click', openModal);

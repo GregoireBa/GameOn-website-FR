@@ -1,5 +1,4 @@
 // Form
-
 const formGame = document.getElementById("formGame");
 const firstname = document.getElementById("firstname");
 const lastname = document.getElementById("lastname");
@@ -27,14 +26,15 @@ function showError(input, message) {
 
 function hideError(elementOrContainerId) {
   let errorElement;
-  
+
   // Si l'argument est une chaîne, il est traité comme l'ID d'un conteneur d'erreur de groupe
   if (typeof elementOrContainerId === "string") {
     errorElement = document.getElementById(elementOrContainerId);
   } else {
     // Sinon, l'argument est traité comme un élément du formulaire individuel
     // et on cherche le message d'erreur dans son parent
-    errorElement = elementOrContainerId.parentNode.querySelector(".error-message");
+    errorElement =
+      elementOrContainerId.parentNode.querySelector(".error-message");
   }
 
   if (errorElement) {
@@ -59,7 +59,10 @@ function validate() {
 
   // Validation du prénom
   if (firstname.value.trim().length < 2) {
-    showError(firstname, "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
+    showError(
+      firstname,
+      "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
+    );
     isValid = false;
   } else {
     hideError(firstname);
@@ -67,7 +70,10 @@ function validate() {
 
   // Validation du nom
   if (lastname.value.trim().length < 2) {
-    showError(lastname, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
+    showError(
+      lastname,
+      "Veuillez entrer 2 caractères ou plus pour le champ du nom."
+    );
     isValid = false;
   } else {
     hideError(lastname);
@@ -81,14 +87,35 @@ function validate() {
     hideError(email);
   }
 
-  // Validation de la date de naissance (exemple basique)
-  if (!birthdate.value) {
-    showError(birthdate, "Vous devez entrer votre date de naissance.");
-    isValid = false;
-  } else {
-    hideError(birthdate);
-  }
+// Validation de la date de naissance avec vérification de l'année
+if (!birthdate.value) {
+  showError(birthdate, "Vous devez entrer votre date de naissance.");
+  isValid = false;
+} else {
+  var parts = birthdate.value.split("-");
+  if (parts.length === 3) {
+      var year = parseInt(parts[0], 10);
+      var month = parseInt(parts[1], 10) - 1; // Les mois sont indexés à partir de 0
+      var day = parseInt(parts[2], 10);
 
+      // Ajout de la vérification de l'année
+      if (year < 1900 || year > new Date().getFullYear()) {
+          showError(birthdate, "L'année de naissance doit être comprise entre 1900 et l'année en cours.");
+          isValid = false;
+      } else {
+          var dateObj = new Date(year, month, day);
+          if (dateObj.getFullYear() !== year || dateObj.getMonth() !== month || dateObj.getDate() !== day) {
+              showError(birthdate, "La date entrée n'est pas valide.");
+              isValid = false;
+          } else {
+              hideError(birthdate);
+          }
+      }
+  } else {
+      showError(birthdate, "Le format de la date doit être JJ/MM/AAAA.");
+      isValid = false;
+  }
+}
   // Validation du nombre de tournois
   if (
     quantityEvent.value.trim() === "" ||
@@ -106,8 +133,15 @@ function validate() {
   }
 
   // Validation des radio button
-  if (![location1, location2, location3, location4, location5, location6].some(location => location.checked)) {
-    showErrorForGroup("location-error-message", "Veuillez sélectionner un tournoi.");
+  if (
+    ![location1, location2, location3, location4, location5, location6].some(
+      (location) => location.checked
+    )
+  ) {
+    showErrorForGroup(
+      "location-error-message",
+      "Veuillez sélectionner un tournoi."
+    );
     isValid = false;
   } else {
     hideError("location-error-message");
@@ -115,7 +149,10 @@ function validate() {
 
   // Validation des conditions d'utilisation
   if (!checkbox1.checked) {
-    showError(checkbox1, "Vous devez vérifier que vous acceptez les termes et conditions.");
+    showError(
+      checkbox1,
+      "Vous devez vérifier que vous acceptez les termes et conditions."
+    );
     isValid = false;
   } else {
     hideError(checkbox1);
@@ -125,18 +162,19 @@ function validate() {
 }
 
 function setupRadioListeners() {
-  [location1, location2, location3, location4, location5, location6].forEach(location => {
-    location.addEventListener('change', () => {
-      hideError("location-error-message");
-    });
-  });
+  [location1, location2, location3, location4, location5, location6].forEach(
+    (location) => {
+      location.addEventListener("change", () => {
+        hideError("location-error-message");
+      });
+    }
+  );
 }
-
 // Appel setupRadioListeners lors de l'initialisation
 setupRadioListeners();
 
 // Attache l'écouteur d'événements pour le bouton "Fermer"
-document.getElementById("close-button").addEventListener('click', function() {
+document.getElementById("close-button").addEventListener("click", function () {
   // Cacher le message de succès
   document.getElementById("success-message").style.display = "none";
 
@@ -144,18 +182,17 @@ document.getElementById("close-button").addEventListener('click', function() {
   document.getElementById("formGame").reset();
 
   // Cacher la modal entière
-  document.querySelector('.bground').style.display = "none";
-
+  document.querySelector(".bground").style.display = "none";
 });
 
-formGame.addEventListener('submit', function(event) {
+formGame.addEventListener("submit", function (event) {
   event.preventDefault(); // Empêche la soumission par défaut du formulaire
   const isValid = validate();
   if (isValid) {
-      // Afficher le message de succès
-      document.getElementById("success-message").style.display = "block";
-     
-      // Cacher le formulaire
-      document.getElementById("formGame").style.display = "none";
+    // Afficher le message de succès
+    document.getElementById("success-message").style.display = "block";
+
+    // Cacher le formulaire
+    document.getElementById("formGame").style.display = "none";
   }
 });
